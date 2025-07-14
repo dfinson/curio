@@ -22,8 +22,8 @@ export default function PromptInterview() {
       <input value={input} onChange={(e) => setInput(e.target.value)} />
       <button onClick={send}>Send</button>
       <ul>
-        {messages.map((m, i) => (
-          <li key={i}>{m}</li>
+        {messages.map((m) => (
+          <li key={m}>{m}</li>
         ))}
       </ul>
     </div>
