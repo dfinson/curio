@@ -1,0 +1,9 @@
+openai
+tiktoken
+crewai
+fastapi
+uvicorn
+httpx
+redis
+psycopg2-binary
+python-dotenv
