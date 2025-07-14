@@ -14,4 +14,4 @@ async def web_search(query: str, max_calls: int = 3) -> List[str]:
         resp = await client.get(SEARCH_API_ENDPOINT, headers=headers, params=params)
         resp.raise_for_status()
         data = resp.json()
-        return [item['snippet'] for item in data.get('webPages', {}).get('value', [])]
+        return [item.get('snippet', '') for item in data.get('webPages', {}).get('value', [])]
