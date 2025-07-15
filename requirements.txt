@@ -7,3 +7,4 @@ httpx
 redis
 psycopg2-binary
 python-dotenv
+tavily-python
