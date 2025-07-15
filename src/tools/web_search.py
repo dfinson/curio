@@ -1,17 +1,11 @@
-"""Simple web search utility."""
+"""Simple web search utility using Tavily's Python SDK."""
 
 from typing import List
-import httpx
-import os
+from tavily import AsyncTavilyClient
 
-SEARCH_API_ENDPOINT = "https://api.bing.microsoft.com/v7.0/search"
 
 async def web_search(query: str, max_calls: int = 3) -> List[str]:
-    api_key = os.getenv("SEARCH_API_KEY")
-    headers = {"Ocp-Apim-Subscription-Key": api_key}
-    params = {"q": query, "count": str(max_calls)}
-    async with httpx.AsyncClient() as client:
-        resp = await client.get(SEARCH_API_ENDPOINT, headers=headers, params=params)
-        resp.raise_for_status()
-        data = resp.json()
-        return [item.get('snippet', '') for item in data.get('webPages', {}).get('value', [])]
+    """Query Tavily and return snippet texts."""
+    async with AsyncTavilyClient() as client:
+        data = await client.search(query, max_results=max_calls)
+        return [item.get("content", "") for item in data.get("results", [])]
